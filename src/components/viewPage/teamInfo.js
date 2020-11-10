@@ -458,6 +458,21 @@ class TeamInfo extends Component {
                                 <option value={'program'}>Program Risk</option>
                             </Form.Control>
                         </Col>
+                        <Col>
+                            <Form.Control
+                                as="select"
+                                className="my-1 mr-sm-2"
+                                onChange={(text) => { this.props.handleUpdateTeamRisk(this.props.activeSimulation.simulation.key, this.props.team, risk, {roam: text.target.value}) }}
+                                value={(this.props.activeSimulation.simulation.teams[this.props.team].risks[risk].roam) ? this.props.activeSimulation.simulation.teams[this.props.team].risks[risk].roam : ''}
+                                custom
+                            >
+                                <option value={''} disabled>Choose</option>
+                                <option value={'resolved'}>Resolved</option>
+                                <option value={'owned'}>Owned</option>
+                                <option value={'accepted'}>Accepted</option>
+                                <option value={'mitigated'}>Mitigated</option>
+                            </Form.Control>
+                        </Col>
                     </Row>
                 )
             }
@@ -471,6 +486,9 @@ class TeamInfo extends Component {
                     </Col>
                     <Col>
                         <Card.Title style={{ fontSize: '14px' }}>Type</Card.Title>
+                    </Col>
+                    <Col>
+                        <Card.Title style={{ fontSize: '14px' }}>ROAM</Card.Title>
                     </Col>
                 </Row>
                 {risks}
@@ -544,6 +562,14 @@ class TeamInfo extends Component {
                         </Row>
                     )
                 }
+                participants.push(<Row>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col>
+                        <strong>{this.calculateCapacity(keyIteration)}</strong>
+                    </Col>
+                </Row>)
             }
         }
 

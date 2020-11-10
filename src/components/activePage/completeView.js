@@ -253,6 +253,9 @@ class Main extends Component {
                         <Col>
                             {data.type}
                         </Col>
+                        <Col>
+                            {data.roam}
+                        </Col>
                     </Row>
                 );
             })
@@ -269,6 +272,9 @@ class Main extends Component {
                     </Col>
                     <Col>
                         <Card.Title style={{ fontSize: '14px' }}>Type</Card.Title>
+                    </Col>
+                    <Col>
+                        <Card.Title style={{ fontSize: '14px' }}>ROAM</Card.Title>
                     </Col>
                 </Row>
                 {rows}
