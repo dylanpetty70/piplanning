@@ -54,6 +54,25 @@ class TeamInfo extends Component {
     componentDidMount() {
     }
 
+    componentDidUpdate(prevProps){
+        if(prevProps.team !== this.props.team){
+            this.setState({
+                selectedPage: 'participants',
+                selectedFeature: '',
+                selectedIteration: '',
+                showNewStory: false,
+                tempNewFeature: '',
+                tempNewStory: '',
+                showNewRisk: false,
+                tempRisk: '',
+                showNewParticipant: false,
+                tempParticipant: '',
+                showNewObjective: false,
+                tempObjective: ''
+            })
+        }
+    }
+
     calculateCapacity(iteration) {
         let total = 0;
         if (this.props.activeSimulation.simulation.teams[this.props.team].users) {
@@ -69,7 +88,7 @@ class TeamInfo extends Component {
 
     calculateLoad(iteration) {
         let total = 0;
-        if (this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration].story) {
+        if (this.props.activeSimulation.simulation.teams[this.props.team].iterations && this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration] && this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration].story) {
             for (var keys in this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration].story) {
                 let featKey = this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration].story[keys].featKey
                 let storyKey = this.props.activeSimulation.simulation.teams[this.props.team].iterations[iteration].story[keys].key
@@ -248,7 +267,7 @@ class TeamInfo extends Component {
         let features = this.props.activeSimulation.simulation.features;
         let stories = [];
 
-        if (this.props.activeSimulation.simulation.teams[this.props.team].iterations && this.state.selectedIteration !== '') {
+        if (this.props.activeSimulation.simulation.teams[this.props.team].iterations && this.state.selectedIteration !== '' && this.props.activeSimulation.simulation.teams[this.props.team].iterations[this.state.selectedIteration]) {
             if (this.props.activeSimulation.simulation.teams[this.props.team].iterations[this.state.selectedIteration].story) {
                 for (var key in this.props.activeSimulation.simulation.teams[this.props.team].iterations[this.state.selectedIteration].story) {
                     let story = this.props.activeSimulation.simulation.teams[this.props.team].iterations[this.state.selectedIteration].story[key];
